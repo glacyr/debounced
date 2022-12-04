@@ -1,0 +1,18 @@
+[package]
+name = "debounced"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Utility for building delayed `Future`s and debounced `Stream`s that wait a given duration before yielding the most recent item."
+documentation = "https://docs.rs/debounced/"
+homepage = "https://github.com/glacyr/debounced"
+repository = "https://github.com/glacyr/debounced"
+
+[dependencies]
+futures-timer = "3.0.2"
+futures-util = { version = "0.3.25", default-features = false, features = ["sink"] }
+
+[dev-dependencies]
+futures-channel = { version = "0.3.25", features = ["sink"] }
+tokio = { version = "1.22.0", features = ["full", "test-util"] }
+tokio-test = "0.4.2"
