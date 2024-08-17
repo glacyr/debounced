@@ -1,18 +1,21 @@
 [package]
-name = "debounced"
+name = "debounced-wasm"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-description = "Utility for building delayed `Future`s and debounced `Stream`s that wait a given duration before yielding the most recent item."
+description = "A fork of the debounced crate that works with wasm"
 documentation = "https://docs.rs/debounced/"
 homepage = "https://github.com/glacyr/debounced"
 repository = "https://github.com/glacyr/debounced"
 
+[features]
+wasm-bindgen = ["futures-timer/wasm-bindgen"]
+
 [dependencies]
-futures-timer = "3.0.2"
-futures-util = { version = "0.3.25", default-features = false, features = ["sink"] }
+futures-timer = "3.0.3"
+futures-util = { version = "0.3.30", default-features = false, features = ["sink"] }
 
 [dev-dependencies]
-futures-channel = { version = "0.3.25", features = ["sink"] }
-tokio = { version = "1.22.0", features = ["full", "test-util"] }
-tokio-test = "0.4.2"
+futures-channel = { version = "0.3.30", features = ["sink"] }
+tokio = { version = "1.39.2", features = ["full", "test-util"] }
+tokio-test = "0.4.4"

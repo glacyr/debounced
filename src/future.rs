@@ -11,7 +11,7 @@ use futures_util::FutureExt;
 /// ```rust
 /// # use std::time::{Duration, Instant};
 /// # tokio_test::block_on(async {
-/// use debounced::Delayed;
+/// use debounced_wasm::Delayed;
 ///
 /// let start = Instant::now();
 /// let delayed = Delayed::new(42, Duration::from_secs(1)).await;
@@ -54,7 +54,7 @@ impl<T> Future for Delayed<T> {
 /// ```rust
 /// # use std::time::{Duration, Instant};
 /// # tokio_test::block_on(async {
-/// use debounced::delayed;
+/// use debounced_wasm::delayed;
 ///
 /// let start = Instant::now();
 /// let delayed = delayed(42, Duration::from_secs(1)).await;

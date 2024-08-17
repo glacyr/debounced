@@ -14,7 +14,7 @@
 //! ```rust
 //! # use std::time::{Duration, Instant};
 //! # tokio_test::block_on(async {
-//! use debounced::delayed;
+//! use debounced_wasm::delayed;
 //!
 //! # let start = Instant::now();
 //! let delayed = delayed(42, Duration::from_secs(1)).await;
@@ -30,7 +30,7 @@
 //! # use std::time::{Duration, Instant};
 //! # use futures_util::{SinkExt, StreamExt};
 //! # tokio_test::block_on(async {
-//! use debounced::debounced;
+//! use debounced_wasm::debounced;
 //!
 //! # let start = Instant::now();
 //! let (mut sender, receiver) = futures_channel::mpsc::channel(1024);
