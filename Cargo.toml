@@ -8,6 +8,9 @@ documentation = "https://docs.rs/debounced/"
 homepage = "https://github.com/glacyr/debounced"
 repository = "https://github.com/glacyr/debounced"
 
+[features]
+wasm-bindgen = ["futures-timer/wasm-bindgen"]
+
 [dependencies]
 futures-timer = "3.0.2"
 futures-util = { version = "0.3.25", default-features = false, features = ["sink"] }
