@@ -13,7 +13,7 @@ use super::{delayed, Delayed};
 /// # use std::time::{Duration, Instant};
 /// # use futures_util::{SinkExt, StreamExt};
 /// # tokio_test::block_on(async {
-/// use debounced_wasm::Debounced;
+/// use debounced::Debounced;
 ///
 /// # let start = Instant::now();
 /// let (mut sender, receiver) = futures_channel::mpsc::channel(1024);
@@ -88,7 +88,7 @@ where
 /// # use std::time::{Duration, Instant};
 /// # use futures_util::{SinkExt, StreamExt};
 /// # tokio_test::block_on(async {
-/// use debounced_wasm::debounced;
+/// use debounced::debounced;
 ///
 /// # let start = Instant::now();
 /// let (mut sender, receiver) = futures_channel::mpsc::channel(1024);
