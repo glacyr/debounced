@@ -29,7 +29,7 @@ pub struct Debounced<S>
 where
     S: Stream,
 {
-    stream: S,
+    stream: Option<S>,
     delay: Duration,
     pending: Option<Delayed<S::Item>>,
 }
@@ -42,7 +42,7 @@ where
     /// yields the most recent item afterwards.
     pub fn new(stream: S, delay: Duration) -> Debounced<S> {
         Debounced {
-            stream,
+            stream: Some(stream),
             delay,
             pending: None,
         }
@@ -56,13 +56,16 @@ where
     type Item = S::Item;
 
     fn poll_next(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
-        while let Poll::Ready(next) = self.stream.poll_next_unpin(cx) {
+        while let Poll::Ready(next) = self
+            .stream
+            .as_mut()
+            .map_or(Poll::Pending, |stream| stream.poll_next_unpin(cx))
+        {
             match next {
                 Some(next) => self.pending = Some(delayed(next, self.delay)),
                 None => {
-                    if self.pending.is_none() {
-                        return Poll::Ready(None);
-                    }
+                    // Stream finished und must not be polled again.
+                    self.stream = None;
                     break;
                 }
             }
@@ -76,7 +79,14 @@ where
                 }
                 Poll::Pending => Poll::Pending,
             },
-            None => Poll::Pending,
+            None => {
+                if self.stream.is_none() {
+                    // Stream finished.
+                    Poll::Ready(None)
+                } else {
+                    Poll::Pending
+                }
+            }
         }
     }
 }
